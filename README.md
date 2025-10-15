@@ -5,8 +5,8 @@
 AstroVink is a Vision Transformer (ViT-S/14, DINOv2 backbone) model fine-tuned for automated strong gravitational lens detection on Euclid Space Telescope images.  
 
 The model architecture and training setup are described in the paper  
-**“AstroVink: A Vision Transformer approach to find strong gravitational lens systems”**  
-(*Vincken et al., in prep., Astronomy & Astrophysics*).
+**“Euclid Quick Data Release (Q1): AstroVink – A vision transformer approach to find strong gravitational lens systems.”**  
+(*Vincken, S. H. et al., in prep., Astronomy & Astrophysics*).
 
 ## Installation
 
@@ -59,7 +59,7 @@ Please make sure to update tests as appropriate.
 If you use AstroVink-Q1 or any part of this repository in academic work, please cite:
 
 Vincken, S. H. (2025).  
-“A Vision Transformer approach to strong gravitational lens classification.”  
+*Euclid Quick Data Release (Q1): AstroVink – A vision transformer approach to find strong gravitational lens systems.*  
 *Astronomy & Astrophysics* (in preparation).
 
 A complete citation record is available in the `CITATION.cff` file.
