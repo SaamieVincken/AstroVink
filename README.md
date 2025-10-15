@@ -1,4 +1,7 @@
 # AstroVink
+<p align="center">
+  <img src="assets/AstroVink-LOGO(c).png" width="220"/>
+</p>
 
 **Version:** AstroVink-Q1  
 
