@@ -1,4 +1,7 @@
 # AstroVink
+<p align="center">
+  <img src="assets/AstroVink-LOGO(c).png" width="220"/>
+</p>
 
 **Version:** AstroVink-Q1  
 
@@ -70,3 +73,17 @@ This project is released under the **MIT** License.
 See the `LICENSE` file for the full license text.  
 The license applies only to the code in this repository.  
 All Euclid data remain proprietary and are not included under this license.
+
+## Contact
+
+For questions or collaborations related to AstroVink, please contact:
+
+**Saamie Helena Vincken**
+
+Email: saamievincken@protonmail.com
+
+FHNW University of Applied Sciences and Arts Northwestern Switzerland  
+Email: saamie.vincken@fhnw.ch  
+
+GitHub: [@saamievincken](https://github.com/saamievincken)
+
