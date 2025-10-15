@@ -15,7 +15,7 @@ utils.py       – Device handling and helper functions.
 """
 
 __version__ = "AstroVink-Q1"
-__owner__ = "Saamie Vincken"
+__owner__ = "Saamie Helena Vincken"
 
 # Public imports
 from .inference import predict
