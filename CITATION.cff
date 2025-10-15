@@ -1,17 +1,18 @@
 cff-version: 1.2.0
-message: "If you use AstroVink-Q1, please cite this paper."
+message: "If you use AstroVink, please cite this paper."
 authors:
   - family-names: Vincken
     given-names: Saamie Helena
-title: "AstroVink: A vision transformer approach to find strong gravitational lens systems."
+title: "Euclid Quick Data Release (Q1): AstroVink – A vision transformer approach to find strong gravitational lens systems."
 version: "1.0.0"
-date-released: "in prep."
+date-released: "2025-10-15"
 repository-code: "https://github.com/yourusername/AstroVink-Q1"
 preferred-citation:
   type: article
-  title: "AstroVink: A vision transformer approach to find strong gravitational lens systems."
+  title: "Euclid Quick Data Release (Q1): AstroVink – A vision transformer approach to find strong gravitational lens systems."
   authors:
     - family-names: Vincken
       given-names: Saamie Helena
   journal: "Astronomy & Astrophysics"
   year: 2025
+  notes: "In preparation"
