@@ -1,7 +1,7 @@
 import torch
 import torch.nn.functional as F
 from PIL import Image
-from .model import load_astrovink_q1
+from .model import load_astrovink
 from .transforms import get_transforms
 from .utils import get_device
 

@@ -1,7 +1,7 @@
 import os
-
 import torch
 from torch import nn
+import torch.nn.functional as F
 
 
 class DINOv2ForClassification(nn.Module):
@@ -46,9 +46,9 @@ def load_pretrained_dinov2(device):
     return encoder
 
 
-def load_astrovink_q1(weights_path, device):
+def load_astrovink(weights_path, device):
     """
-    Loads the full AstroVink-Q1 model with the DINOv2 encoder and classifier weights.
+    Loads the full AstroVink model with the DINOv2 encoder and classifier weights.
 
     Parameters
     ----------
@@ -73,3 +73,44 @@ def load_astrovink_q1(weights_path, device):
     model.load_state_dict(state_dict)
     model.eval()
     return model
+
+
+class FocalLoss(nn.Module):
+    """
+    Focal Loss for imbalanced binary classification,
+    as used for retraining on imbalanced or harder data.
+    Alpha balances class weights, and gamma focuses on harder examples.
+
+    Parameters
+    ----------
+    alpha : list[float]
+        Weighting factors for each class [Lens, NoLens].
+    gamma : float
+        Focusing parameter that reduces the loss for easy examples.
+    reduction : str
+        Specifies reduction ('mean' or 'sum').
+    """
+
+    def __init__(self, alpha=None, gamma=2.0, reduction='mean'):
+        super().__init__()
+        if alpha is None:
+            alpha = [1.0, 1.0]
+        self.alpha = torch.tensor(alpha, dtype=torch.float32)
+        self.gamma = gamma
+        self.reduction = reduction
+
+    def forward(self, inputs, targets):
+        if inputs.ndim > 1 and inputs.size(1) > 1:
+            ce_loss = F.cross_entropy(inputs, targets, reduction='none')
+        else:
+            ce_loss = F.binary_cross_entropy_with_logits(inputs.squeeze(), targets.float(), reduction='none')
+
+        pt = torch.exp(-ce_loss)
+        alpha_t = self.alpha.to(inputs.device)[targets]
+        focal_loss = alpha_t * (1 - pt) ** self.gamma * ce_loss
+
+        if self.reduction == 'mean':
+            return focal_loss.mean()
+        elif self.reduction == 'sum':
+            return focal_loss.sum()
+        return focal_loss
