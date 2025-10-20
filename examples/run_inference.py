@@ -1,7 +1,7 @@
 import astro_vink
 
 # Path to weights and image
-weights_path = "weights/astrovink_q1.pth"
+weights_path = "weights/astrovink.pth"
 image_path = "example_cutout.jpg"
 
 # Run inference
