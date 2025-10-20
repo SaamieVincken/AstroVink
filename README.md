@@ -8,7 +8,7 @@
 AstroVink is a Vision Transformer (ViT-S/14, DINOv2 backbone) model fine-tuned for automated strong gravitational lens detection on Euclid Space Telescope images.  
 
 The model architecture and training setup are described in the paper  
-**“Euclid Quick Data Release (Q1): AstroVink – A vision transformer approach to find strong gravitational lens systems.”**  
+**“Euclid Quick Data Release (Q1): AstroVink: A vision transformer approach to find strong gravitational lens systems.”**  
 (*Vincken, S. H. et al., in prep., Astronomy & Astrophysics*).
 
 ## Installation
@@ -16,12 +16,12 @@ The model architecture and training setup are described in the paper
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install AstroVink.
 
 ```bash
-pip install -e
+pip install -e .
 ```
 
 ## Repository structure
 
-astro_vink/ – model, inference, transforms, metrics, and utilities  
+astro_vink/ – model, inference, transforms, metrics, training and utilities  
 examples/ – example scripts (no data included)  
 weights/ – optional folder for local model checkpoints  
 
@@ -29,7 +29,7 @@ weights/ – optional folder for local model checkpoints
 ## Usage
 After installation, you can run inference on an image using a fine-tuned model checkpoint.
 
-#### Example
+#### Inference example
 A ready to run example script is provided at 
 `examples/run_inference.py`
 
@@ -43,19 +43,27 @@ This script demonstrates how to:
 - Run inference on an image
 - Print the lens and non-lens probabilities
 
+#### Training examples
+Example scripts are also provided for training and fine-tuning:
+
+`examples/run_training.py` trains the AstroVink (base) model from scratch.
+
+`examples/run_retraining.py` fine-tunes the model on new data.
+
+These can be executed directly from the project root:
+
+```bash
+python examples/run_training.py
+```
+```bash
+python examples/run_retraining.py
+```
+
 **Note:** This repository does **not** include any model weights or images. To run the example, you must provide your own image file and specify the path to the weights.
 
 ## Data availability
 
 The data AstroVink-Q1 is applied to is available on [Zenodo](https://zenodo.org/records/15025832) as the **Euclid Quick Data Release (Q1): The Strong Lensing Discovery Engine (SLDE).**
-
-
-## Contributing
-
-Pull requests are welcome. For major changes, please open an issue first
-to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
 
 ## Citation
 
