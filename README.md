@@ -90,8 +90,5 @@ For questions or collaborations related to AstroVink, please contact:
 
 Email: saamievincken@protonmail.com
 
-FHNW University of Applied Sciences and Arts Northwestern Switzerland  
-Email: saamie.vincken@fhnw.ch  
-
 GitHub: [@saamievincken](https://github.com/saamievincken)
 
