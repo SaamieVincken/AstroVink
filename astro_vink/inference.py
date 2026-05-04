@@ -24,7 +24,7 @@ def predict(image_path: str, weights_path: str):
         {'Lens': float, 'NoLens': float}
     """
     device = get_device()
-    model = load_astrovink_q1(weights_path, device)
+    model = load_astrovink(weights_path, device)
 
     transform = get_transforms("inference")
     image = Image.open(image_path).convert("RGB")
