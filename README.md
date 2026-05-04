@@ -25,6 +25,13 @@ astro_vink/ – model, inference, transforms, metrics, training and utilities
 examples/ – example scripts (no data included)  
 weights/ – optional folder for local model checkpoints  
 
+## Get the AstroVink weights
+
+The AstroVink-Q1 model weights are available on Hugging Face:
+
+https://huggingface.co/SaamieVincken/AstroVink-Q1
+
+These weights are released under the **MIT License**, consistent with this repository.
 
 ## Usage
 After installation, you can run inference on an image using a fine-tuned model checkpoint.
