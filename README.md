@@ -1,6 +1,6 @@
 # AstroVink
 <p align="center">
-  <img src="assets/AstroVink-LOGO(c).png" width="220"/>
+  <img src="assets/AstroVink-LOGO-outline(c).png" width="220"/>
 </p>
 
 **Version:** AstroVink-Q1  
@@ -9,7 +9,7 @@ AstroVink is a Vision Transformer (ViT-S/14, DINOv2 backbone) model fine-tuned f
 
 The model architecture and training setup are described in the paper  
 **“Euclid Quick Data Release (Q1): AstroVink: A vision transformer approach to find strong gravitational lens systems.”**  
-(*Vincken, S. H. et al., in prep., Astronomy & Astrophysics*).
+(*Vincken, S. H. et al., in prep., Astronomy & Astrophysics*), Arxiv link: [https://arxiv.org/abs/2604.21977](https://arxiv.org/abs/2604.21977). 
 
 ## Installation
 
