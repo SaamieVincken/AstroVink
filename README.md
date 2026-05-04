@@ -29,7 +29,7 @@ weights/ – optional folder for local model checkpoints
 
 The AstroVink-Q1 model weights are available on Hugging Face:
 
-https://huggingface.co/SaamieVincken/AstroVink-Q1
+[https://huggingface.co/SaamieVincken/AstroVink-Q1](https://huggingface.co/Saamie/AstroVink-Q1)
 
 These weights are released under the **MIT License**, consistent with this repository.
 
