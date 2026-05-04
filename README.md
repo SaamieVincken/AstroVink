@@ -76,9 +76,9 @@ The data AstroVink-Q1 is applied to is available on [Zenodo](https://zenodo.org/
 
 If you use AstroVink-Q1 or any part of this repository in academic work, please cite:
 
-Vincken, S. H. (2025).  
-*Euclid Quick Data Release (Q1): AstroVink – A vision transformer approach to find strong gravitational lens systems.*  
-*Astronomy & Astrophysics* (in preparation).
+Vincken, S. H. (2026).  
+*Euclid Quick Data Release (Q1). AstroVink: A vision transformer approach to find strong gravitational lens systems.*  
+*Astronomy & Astrophysics* (in preparation). https://arxiv.org/abs/2604.21977.
 
 A complete citation record is available in the `CITATION.cff` file.
 
