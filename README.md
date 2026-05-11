@@ -25,6 +25,13 @@ astro_vink/ – model, inference, transforms, metrics, training and utilities
 examples/ – example scripts (no data included)  
 weights/ – optional folder for local model checkpoints  
 
+## Get the AstroVink weights
+
+The AstroVink-Q1 model weights are available on Hugging Face:
+
+[https://huggingface.co/SaamieVincken/AstroVink-Q1](https://huggingface.co/Saamie/AstroVink-Q1)
+
+These weights are released under the **MIT License**, consistent with this repository.
 
 ## Usage
 After installation, you can run inference on an image using a fine-tuned model checkpoint.
@@ -69,9 +76,9 @@ The data AstroVink-Q1 is applied to is available on [Zenodo](https://zenodo.org/
 
 If you use AstroVink-Q1 or any part of this repository in academic work, please cite:
 
-Vincken, S. H. (2025).  
-*Euclid Quick Data Release (Q1): AstroVink – A vision transformer approach to find strong gravitational lens systems.*  
-*Astronomy & Astrophysics* (in preparation).
+Vincken, S. H. (2026).  
+*Euclid Quick Data Release (Q1). AstroVink: A vision transformer approach to find strong gravitational lens systems.*  
+*Astronomy & Astrophysics* (in preparation). https://arxiv.org/abs/2604.21977.
 
 A complete citation record is available in the `CITATION.cff` file.
 
