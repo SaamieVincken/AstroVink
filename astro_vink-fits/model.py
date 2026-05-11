@@ -2,10 +2,9 @@ import torch
 from torch import nn
 from transformers import AutoModel
 
-DINO_BACKBONE = "facebook/dinov3-vitb16-pretrain-lvd1689m"
 
 
-def load_dinov3():
+def load_dinov3(DINO_BACKBONE):
     return AutoModel.from_pretrained(DINO_BACKBONE, trust_remote_code=True)
 
 

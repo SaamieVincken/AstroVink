@@ -5,14 +5,14 @@ from torch import nn
 from torch.optim.lr_scheduler import CosineAnnealingLR
 from tqdm import tqdm
 from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score, roc_curve
-import wandb
 from torch.amp import autocast, GradScaler
 from transforms import build_aug_transforms
 from dataloader import prepare_dataloaders
 from model import load_dinov3, adapt_dinov3_for_n_channels, DinoV3Classifier
 
-DATA_DIR = "/home2/saamie/AstroVink-FITS/euclid-sl-trainingset-fits"
-OUTPUT_WEIGHTS = "/home2/saamie/AstroVink-FITS/AstroVink-DR1-FITS-v4.pth"
+base_weights = ""
+output_weights = ""
+data_dir = ""
 
 BANDS_TO_USE = ['VIS_BGSUB', 'NIR_Y_BGSUB', 'NIR_J_BGSUB', 'NIR_H_BGSUB']
 NUM_CHANNELS = len(BANDS_TO_USE)
@@ -26,12 +26,12 @@ PATIENCE = 5
 ENCODER_LR = 5e-6
 HEAD_LR = 5e-4
 WEIGHT_DECAY = 0.03
-# GRAD_CLIP = 3.0
 
 USE_AMP = True
 AMP_DTYPE = torch.bfloat16
 
 SEED = 9999
+
 DINO_BACKBONE = "facebook/dinov3-vitb16-pretrain-lvd1689m"
 
 
@@ -56,12 +56,12 @@ def train():
     device = torch.device("cuda")
 
     train_aug = build_aug_transforms(IMG_SIZE, train=True, num_channels=NUM_CHANNELS)
-    val_aug = build_aug_transforms(train=False, num_channels=NUM_CHANNELS)
+    val_aug = build_aug_transforms(IMG_SIZE, train=False, num_channels=NUM_CHANNELS)
 
-    train_loader, val_loader, class_to_idx = prepare_dataloaders(train_aug, val_aug, BANDS_TO_USE, batch_size=BATCH_SIZE, num_workers=NUM_WORKERS)
+    train_loader, val_loader, class_to_idx = prepare_dataloaders(data_dir, train_aug, val_aug, BANDS_TO_USE,
+                                                                 batch_size=BATCH_SIZE, num_workers=NUM_WORKERS)
 
-    encoder = load_dinov3()
-    print(encoder)
+    encoder = load_dinov3(DINO_BACKBONE)
     encoder = adapt_dinov3_for_n_channels(encoder, NUM_CHANNELS)
     encoder = encoder.to(device)
     model = DinoV3Classifier(encoder).to(device)
@@ -196,17 +196,15 @@ def train():
                 "num_channels": NUM_CHANNELS,
                 "bands": BANDS_TO_USE,
             }
-            torch.save(ckpt, OUTPUT_WEIGHTS)
+            torch.save(ckpt, output_weights)
             print(
-                f"Saved new best model to: {OUTPUT_WEIGHTS} | epoch={epoch + 1} | val_loss={val_loss:.6f} | val_acc={val_acc:.6f} | val_f1={val_f1:.6f}")
+                f"Saved new best model to: {output_weights} | epoch={epoch + 1} | val_loss={val_loss:.6f} | val_acc={val_acc:.6f} | val_f1={val_f1:.6f}")
         else:
             patience_ctr += 1
 
         if patience_ctr >= PATIENCE:
             print("Early stopping.")
             break
-
-    wandb.finish()
 
 
 set_seed()

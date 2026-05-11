@@ -88,7 +88,7 @@ def prepare_dataloaders(data_dir, train_aug, val_aug, bands_to_use=4, batch_size
         shuffle=True,
         num_workers=num_workers,
         pin_memory=True,
-        persistent_workers=True,
+        persistent_workers=num_workers > 0,
         prefetch_factor=4,
         worker_init_fn=worker_init_fn,
     )
@@ -98,14 +98,14 @@ def prepare_dataloaders(data_dir, train_aug, val_aug, bands_to_use=4, batch_size
         batch_size=batch_size,
         shuffle=False,
         num_workers=num_workers,
-        pin_memory=True,
+        persistent_workers=num_workers > 0,
         worker_init_fn=worker_init_fn,
     )
 
     return train_loader, val_loader, train_ds.class_to_idx
 
 
-def arcsinh_preprocess_multiband(bands_data):
+def arcsinh_preprocess_multiband(bands_data, q=Q, clip=CLIP):
     """
     Apply arcsinh preprocessing to multiple bands while preserving relative flux scaling.
     bands_data: list of numpy arrays, one per band
@@ -114,11 +114,11 @@ def arcsinh_preprocess_multiband(bands_data):
 
     # Apply arcsinh and clipping to each band
     for band in bands_data:
-        band = np.arcsinh(band * Q)
+        band = np.arcsinh(band * q)
         band = np.clip(band, 0, None)
 
-        if CLIP < 100.0:
-            clip_val = np.percentile(band, CLIP)
+        if clip < 100.0:
+            clip_val = np.percentile(band, clip)
             band = np.clip(band, 0, clip_val)
 
         processed_bands.append(band)
