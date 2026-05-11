@@ -1,3 +1,4 @@
+import os
 import random
 import numpy as np
 import torch
@@ -10,11 +11,13 @@ from transforms import build_aug_transforms
 from dataloader import prepare_dataloaders
 from model import load_dinov3, adapt_dinov3_for_n_channels, DinoV3Classifier
 
-base_weights = ""
+base_weights = ""  # Set to checkpoint path for retraining, or leave empty for training from scratch
 output_weights = ""
 data_dir = ""
 
-BANDS_TO_USE = ['VIS_BGSUB', 'NIR_Y_BGSUB', 'NIR_J_BGSUB', 'NIR_H_BGSUB']
+# Define the fits extensions of the bands you want to use.
+# For Euclid this is ['VIS_BGSUB', 'NIR_Y_BGSUB', 'NIR_J_BGSUB', 'NIR_H_BGSUB']
+BANDS_TO_USE = []
 NUM_CHANNELS = len(BANDS_TO_USE)
 
 IMG_SIZE = 256
@@ -52,6 +55,25 @@ def set_seed():
     torch.backends.cudnn.deterministic = False
 
 
+def load_checkpoint(model, checkpoint_path, device):
+    if not checkpoint_path or not os.path.exists(checkpoint_path):
+        if checkpoint_path:
+            print(f"Checkpoint not found at {checkpoint_path}, training from scratch")
+
+    ckpt = torch.load(checkpoint_path, map_location=device)
+
+    # Check if channel count differs
+    if 'num_channels' in ckpt and ckpt['num_channels'] != NUM_CHANNELS:
+        print(f"Checkpoint has {ckpt['num_channels']} channels, current config uses {NUM_CHANNELS}")
+        # Load with strict=False to skip the mismatched patch_embeddings layer
+        # Everything else (encoder layers, head) will load fine
+        missing, unexpected = model.load_state_dict(ckpt['model_state_dict'], strict=False)
+        return True
+
+    # If channels match, load normally
+    model.load_state_dict(ckpt['model_state_dict'])
+
+
 def train():
     device = torch.device("cuda")
 
@@ -65,6 +87,9 @@ def train():
     encoder = adapt_dinov3_for_n_channels(encoder, NUM_CHANNELS)
     encoder = encoder.to(device)
     model = DinoV3Classifier(encoder).to(device)
+
+    # Load pretrained weights if specified
+    load_checkpoint(model, base_weights, device)
 
     criterion = nn.CrossEntropyLoss()
 
