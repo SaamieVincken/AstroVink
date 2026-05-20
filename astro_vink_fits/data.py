@@ -15,7 +15,7 @@ import torch
 from torch.utils.data import Dataset
 from pathlib import Path
 from astropy.io import fits as fits_io
-from .transforms import arcsinh_preprocess
+from transforms import arcsinh_preprocess
 
 DEFAULT_IMG_SIZE = 100
 

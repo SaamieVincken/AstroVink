@@ -11,10 +11,12 @@ from torch import nn
 from torch.optim.lr_scheduler import CosineAnnealingLR
 from torch.utils.data import DataLoader
 from tqdm import tqdm
-from .model import build_model, DEFAULT_BACKBONE
-from .data import FITSDataset
-from .transforms import build_transforms
-from .metrics import compute_metrics
+
+from astro_vink_fits.utils import get_device
+from model import build_model, DEFAULT_BACKBONE
+from data import FITSDataset
+from transforms import build_transforms
+from metrics import compute_metrics
 
 
 def _save_checkpoint(model, backbone, class_to_idx, num_channels, bands, path):
@@ -52,7 +54,7 @@ def train(
     """
     set_seed(seed)
     num_channels = len(bands)
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    device = get_device()
 
     # Transforms
     train_aug = build_transforms(train=True, num_channels=num_channels, img_size=img_size)

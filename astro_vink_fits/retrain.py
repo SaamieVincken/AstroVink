@@ -2,9 +2,9 @@
 AstroVink retrain: resume training from a saved checkpoint, optionally with
 a different number of input channels.
 """
-from . import get_device
-from .model import load_model
-from .train import train as _train
+from astro_vink_fits.utils import get_device
+from model import load_model
+from train import train as _train
 
 
 def retrain(
