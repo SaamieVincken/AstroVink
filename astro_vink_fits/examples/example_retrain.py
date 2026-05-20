@@ -4,6 +4,17 @@ Example: retrain (fine-tune) an existing AstroVink checkpoint.
 
 To add or remove input bands, change the BANDS list below.  The patch
 embedding is automatically re-adapted to the new channel count.
+
+Directory layout expected:
+
+    DATA_DIR/
+        Train/
+            Lens/*.fits
+            NoLens/*.fits
+        Val/
+            Lens/*.fits
+            NoLens/*.fits
+
 """
 
 from astro_vink_fits.retrain import retrain
