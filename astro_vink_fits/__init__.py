@@ -29,7 +29,7 @@ __citation__ = (
 # --- Public imports ---
 # --- Public imports ---
 from .model import (
-    DinoV3Classifier,
+    AstroVink,
     adapt_encoder_channels,
     build_model,
     load_model,
